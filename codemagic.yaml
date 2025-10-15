@@ -7,7 +7,6 @@ workflows:
       cocoapods: default
     scripts:
       - name: Build iOS app
-        script: |
-          xcodebuild -scheme AliciaFloristasApp -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED=NO
+        script: xcodebuild -scheme AliciaFloristasApp -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED=NO
     artifacts:
       - build/**/*.ipa
