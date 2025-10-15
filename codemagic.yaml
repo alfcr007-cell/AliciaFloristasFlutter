@@ -1,27 +1,37 @@
 workflows:
 
-  flutter-app:
+  ios-build:
 
-    name: Build Flutter App
+    name: Build iOS App
 
     max_build_duration: 60
 
     environment:
 
-      flutter: stable
+      xcode: latest
+
+      cocoapods: default
 
     scripts:
 
-      - name: Build release APK
+      - name: Build iOS app
 
         script: |
 
-          flutter clean
+          xcodebuild -scheme AliciaFloristasApp \
 
-          flutter pub get
+            -sdk iphoneos \
 
-          flutter build apk --release
+            -configuration Release \
+
+            CODE_SIGN_IDENTITY="" \
+
+            CODE_SIGNING_REQUIRED=NO \
+
+            CODE_SIGN_ENTITLEMENTS="" \
+
+            CODE_SIGNING_ALLOWED=NO
 
     artifacts:
 
-      - build/app/outputs/flutter-apk/app-release.apk
+      - build/**/*.ipa
