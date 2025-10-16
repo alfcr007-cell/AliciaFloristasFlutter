@@ -1,25 +1,33 @@
 workflows:
 
-  ios-build:
+  android-release:
 
-    name: Build iOS App
+    name: Build Android APK
 
     max_build_duration: 60
 
     environment:
 
-      xcode: latest
+      flutter: stable
 
-      cocoapods: default
+    cache:
+
+      cache_paths:
+
+        - $FLUTTER_ROOT/.pub-cache
 
     scripts:
 
-      - name: Build iOS app
+      - name: Flutter build apk
 
         script: |
 
-          xcodebuild -scheme "AliciaFloristasApp" -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED=NO
+          flutter clean
+
+          flutter pub get
+
+          flutter build apk --release
 
     artifacts:
 
-      - build/**/*.ipa
+      - build/app/outputs/flutter-apk/app-release.apk
